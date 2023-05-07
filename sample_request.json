@@ -1,0 +1,18 @@
+{
+  "source_ps": [
+    "A long time ago in a galaxy far, far away....",
+    "It is a period of civil war. Rebel spaceships, striking from a hidden base, have won their first victory against the evil Galactic Empire.",
+    "War! The Republic is crumbling under attacks by the ruthless Sith Lord, Count Dooku.  There are heroes on both sides.  Evil is everywhere.",
+    "During the battle, Rebel spies managed to steal secret plans to the Empire's ultimate weapon, the DEATH STAR, and space station with enough power to destroy an entire planet.",
+    "Star Wars logo which recedes toward a central point on the screen before disappearing.  The crawl text, which describes the backstory and context of the film, then recedes toward a higher point in relation to the screen and with an apparent effect of disappearing in the distance. The visuals are accompanied by the 'Main Title Theme', composed by John Williams.",
+    "Pursued by the Empire's sinister agents, Princess Leia races home aboard her starship, custodian of the stolen plans that can save her people and restore freedom to the galaxy..."
+  ],
+  "target_ps": [
+    "Давным-давно, в далёкой-далёкой галактике.…",
+    "В Галактике бушует гражданская война. Корабли повстанцев, нанеся удар с тайной базы, одержали первую победу над жестокой Галактической Империей.",
+    "Княгиня встрепенулась. Видимо, слова Пьера затронули ее за живое.",
+    "Для повстанцев настали тяжёлые времена. Хотя Звезда Смерти была уничтожена, имперские войска выбили повстанцев с их базы и преследуют по всей галактике.",
+    "Во время сражения шпионы повстанцев смогли добыть секретные чертежи супероружия Империи — ЗВЕЗДЫ СМЕРТИ, укрепленной космической станции, обладающей достаточной огневой мощью, чтобы уничтожить целую планету.",
+    "Преследуемая зловещими агентами Империи, принцесса Лея летит домой на своем корабле, везя с собой украденные чертежи, которые могут спасти её народ и вернуть свободу галактике…"
+  ]
+}

@@ -8,7 +8,7 @@ from sklearn.linear_model import LogisticRegression
 def get_weights(ps):
     ps_ls = [len(p.split()) for p in ps]
     len_total = sum(ps_ls)
-    return [pl/len_total for pl in ps_ls]
+    return [max(pl/len_total, 1e-10) for pl in ps_ls]
 
 # Culminative weights
 def c_weights(weights):

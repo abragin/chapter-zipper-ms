@@ -43,10 +43,14 @@ def match_chapter(source_ps, target_ps):
                 target_ps[target_pointer:]
                 )
         if not match:
-            first_inconsistent_connection = len(connections) - 1
-            next_match_fn = match_lr
-            match = next_match_fn( source_ps[source_pointer:],
-                    target_ps[target_pointer:])
+            return {
+                    "connections": connections,
+                    "first_inconsistent_connection": None
+                    }
+            #first_inconsistent_connection = len(connections) - 1
+            #next_match_fn = match_lr
+            #match = next_match_fn( source_ps[source_pointer:],
+                    #target_ps[target_pointer:])
         source_pointer += match[0]
         target_pointer += match[1]
         connections.append((source_pointer, target_pointer))

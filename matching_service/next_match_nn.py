@@ -1,6 +1,7 @@
 from transformers import AutoModelForSequenceClassification, BertTokenizer
 import torch.nn.functional as F
 import torch
+import functools
 
 
 model_nm = 'abragin/bert_book_zipper'
@@ -41,6 +42,10 @@ def build_input(ps_source_before, ps_source_after, ps_target_before, ps_target_a
 
 def get_match_prob(ps_source_before, ps_source_after, ps_target_before, ps_target_after):
     input_text = build_input(ps_source_before, ps_source_after, ps_target_before, ps_target_after)
+    return get_match_prob_(input_text)
+
+@functools.lru_cache(maxsize = 2000)
+def get_match_prob_(input_text):
     ipt = tokz(input_text, return_tensors="pt", padding=True)#.to('cuda')
     with torch.inference_mode():
         probs = F.softmax(model(**ipt).logits, dim=1)[0]

@@ -2,17 +2,22 @@ from transformers import AutoModelForSequenceClassification, BertTokenizer
 import torch.nn.functional as F
 import torch
 import functools
+import os
 
 
 model_nm = 'abragin/bert_book_zipper'
 tokz = BertTokenizer.from_pretrained(model_nm)
-model = AutoModelForSequenceClassification.from_pretrained(
-        model_nm, num_labels=2)
 paragraph_sep_token = "[PST]"
 paragraph_separator = f" {paragraph_sep_token} "
 before_after_sep_token = "[BAST]"
 before_after_sep =  f" {before_after_sep_token} "
 sep = f" {tokz.sep_token} "
+if torch.cuda.is_available() and not os.getenv('FORCE_CPU'):
+    torch_device = 'cuda'
+else:
+    torch_device = 'cpu'
+model = AutoModelForSequenceClassification.from_pretrained(
+        model_nm, num_labels=2).to(torch_device)
 
 def shorten_by_tok(ps, cut_start, max_len=126):
     s = paragraph_sep_token.join(ps)
@@ -46,7 +51,7 @@ def get_match_prob(ps_source_before, ps_source_after, ps_target_before, ps_targe
 
 @functools.lru_cache(maxsize = 2000)
 def get_match_prob_(input_text):
-    ipt = tokz(input_text, return_tensors="pt", padding=True)#.to('cuda')
+    ipt = tokz(input_text, return_tensors="pt", padding=True).to(torch_device)
     with torch.inference_mode():
         probs = F.softmax(model(**ipt).logits, dim=1)[0]
         prob_match = probs[1]

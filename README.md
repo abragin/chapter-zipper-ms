@@ -14,3 +14,5 @@ $ gunicorn matching_service.app
 ...
 $ curl -X POST http://localhost:8000/match_chapter -H 'Content-Type: application/json' -d "@sample_request.json"
 ```
+
+Cuda is used if available, but can be turned off by setting `FORCE_CPU` environment variable. If used without cuda huge timeout should be set for gunicorn (e.g. `--timeout 240`)

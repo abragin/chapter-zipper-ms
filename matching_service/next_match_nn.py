@@ -77,3 +77,24 @@ def next_paragraph_match_nn(ps_source_before, ps_source_after, ps_target_before,
             return (si, ti)
     if max_len >= len(ps_source_after) + len(ps_target_after):
         return (len(ps_source_after), len(ps_target_after))
+
+def prev_paragraph_match_nn(ps_source_before, ps_source_after, ps_target_before, ps_target_after):
+    threshold = 0.5
+    total_p_left = len(ps_source_before) + len(ps_target_before)
+    max_len = 8
+    si_ti_s = [
+        (si, ti)
+        for total_len in range(2, max_len+1)
+        for si in range(1, total_len)
+        if (si < len(ps_source_before)) and ((ti := total_len - si) < len(ps_target_before))
+            ]
+    for si, ti in si_ti_s:
+        p_s_before = ps_source_before[:-si]
+        p_s_after = ps_source_before[-si:] + ps_source_after
+        p_t_before = ps_target_before[:-ti]
+        p_t_after = ps_target_before[-ti:] + ps_target_after
+        match_prob = get_match_prob(p_s_before, p_s_after, p_t_before, p_t_after)
+        if match_prob > threshold:
+            return (si, ti)
+    if max_len >= len(ps_source_before) + len(ps_target_before):
+        return (len(ps_source_before), len(ps_target_before))

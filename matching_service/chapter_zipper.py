@@ -6,7 +6,7 @@ def match_chapter(source_ps, target_ps):
     source_pointer = 0
     target_pointer = 0
     connections = []
-    first_inconsistent_connection = None
+    unverified_connections = []
     while (source_pointer < len(source_ps)) or (target_pointer < len(target_ps)):
         match_lr = next_paragraph_match_lr(
                 source_ps[source_pointer:],
@@ -21,14 +21,15 @@ def match_chapter(source_ps, target_ps):
         if not match_nn:
             return {
                     "connections": connections,
-                    "first_inconsistent_connection": first_inconsistent_connection
+                    "unverified_connections": unverified_connections
                     }
-        if (match_nn != match_lr) and (first_inconsistent_connection is None):
-            first_inconsistent_connection = len(connections)
+        if match_nn != match_lr:
+            unverified_connections.append(len(connections))
+
         source_pointer += match_nn[0]
         target_pointer += match_nn[1]
         connections.append((source_pointer, target_pointer))
     return {
             "connections": connections[:-1],
-            "first_inconsistent_connection": first_inconsistent_connection
+            "unverified_connections": unverified_connections
             }

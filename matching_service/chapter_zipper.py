@@ -41,7 +41,7 @@ def match_chapter(source_ps, target_ps):
         source_pointer += match_nn[0]
         target_pointer += match_nn[1]
         connections.append((source_pointer, target_pointer))
-        if match_nn != match_lr:
+        if (match_nn != match_lr) and (source_pointer < len(source_ps)):
             unverified_connections.append(source_pointer)
     return {
             "connections": connections[:-1],
@@ -74,7 +74,7 @@ def backward_chapter_match(source_ps, target_ps):
         source_pointer -= match_nn[0]
         target_pointer -= match_nn[1]
         connections.append((source_pointer, target_pointer))
-        if match_nn != match_lr:
+        if (match_nn != match_lr) and (source_pointer>0):
             unverified_connections.append(source_pointer)
     return {
             "connections": connections[:-1][::-1],
